@@ -15,16 +15,15 @@ class Some extends CallbackPromise {
 	/**
 	 * @param Promise[] $promises tracked promises
 	 * @param $amount - how much of them have to be fulfilled to make this promise fulfilled
+	 * @throws \InvalidArgumentException
 	 */
 	function __construct($promises = [], $amount){
+		if(count($promises) < $amount){
+			throw new \InvalidArgumentException("requested amount is more than available");
+		}
 		parent::__construct(function ($fulfill, $reject) use ($promises, $amount){
-			$count = count($promises);
-			if($count < $amount){
-				throw new \InvalidArgumentException("requested amount is more than available");
-			}
-
 			$left_fulfills = $amount;
-			$left_rejects = $count - $amount + 1;
+			$left_rejects = count($promises) - $amount + 1;
 			$results = [];
 			$reasons = [];
 
