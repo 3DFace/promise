@@ -1,0 +1,21 @@
+{
+	"name": "3DFace/promise",
+	"description": "Implementation of CommonJS Promises/A pattern for PHP.",
+	"keywords": ["promise", "deferred", "async", "flow", "yield"],
+	"type": "library",
+	"license": "MIT",
+	"authors": [{
+		"name": "Denis Ponomarev",
+		"email": "ponomarev@gmail.com"
+	}
+	],
+	"require": {
+		"php": ">=5.5.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*"
+	},
+	"autoload": {
+		"psr-0": {"dface": "src/"}
+	}
+}
