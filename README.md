@@ -1,4 +1,4 @@
-# 3DFace/promise
+# dface/promise
 
 Yet another implementation of CommonJS [Promises/A](http://wiki.commonjs.org/wiki/Promises/A) pattern for PHP.
 
@@ -22,7 +22,7 @@ Add to your composer.json file:
  
 {
    "require": {
-      "3DFace/promise": "*"
+      "dface/promise": "*"
   }
 }
 ```

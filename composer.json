@@ -1,5 +1,5 @@
 {
-	"name": "3DFace/promise",
+	"name": "dface/promise",
 	"description": "Implementation of CommonJS Promises/A pattern for PHP.",
 	"keywords": ["promise", "deferred", "async", "flow", "yield"],
 	"type": "library",
