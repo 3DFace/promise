@@ -38,6 +38,21 @@ class FlowTest extends PromiseTest {
 		$this->assertRejectedReason($x, 'Division by zero');
 	}
 
+	function testTrappedFlow(){
+		$x = new Flow(function () {
+			$v = 0;
+			try{
+				$v = (yield $this->rejectLater(new \Exception($v))) + 1;
+			}catch(\Exception $e){
+				$v = -1;
+			}
+			$v = (yield $this->fulfilLater($v)) + 1;
+			yield $v;
+		});
+		$this->resolveDelayed();
+		$this->assertFulfilledResult($x, 0);
+	}
+
 	function testNotOverflow(){
 		$cycles = 1000;
 		$max_nesting_level = 100;

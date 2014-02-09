@@ -23,4 +23,13 @@ class RejectedTest extends PromiseTest {
 		$this->assertRejectedReason($x, 1);
 	}
 
+	function testRepairFailed(){
+		$x = new Deferred();
+		$y = $x->trap(function(){
+			throw new \Exception("on_reject failed");
+		});
+		$x->reject(1);
+		$this->assertRejectedReason($y, "on_reject failed");
+	}
+
 }
