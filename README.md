@@ -22,7 +22,7 @@ Add to your composer.json file:
  
 {
    "require": {
-      "dface/promise": "*"
+      "dface/promise": "dev-master"
   }
 }
 ```
