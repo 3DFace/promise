@@ -75,7 +75,7 @@ $x = new Flow(function () {
 ```
 `Flow` promise works like an envelope for its 'flow function'. In that function you can use special syntax to work with promises.
 Instead of chaining promises with `then` you can describe execution flow in a straightforward manner just like you do in a synchronous world.
-All you have to do is to preface your promises with `yield` keyword. `Flow` makes the rest behind the scene.
+All you have to do is to preface your promises with `yield` keyword. `Flow` will make the rest behind the scene.
 
 ``` php
 $x = new Flow(function () {
