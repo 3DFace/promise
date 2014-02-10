@@ -19,11 +19,10 @@ So I rejected it.
 Add to your composer.json file:
 
 ``` json
- 
 {
-   "require": {
-      "dface/promise": "dev-master"
-  }
+	"require": {
+		"dface/promise": "dev-master"
+	}
 }
 ```
 
@@ -41,6 +40,7 @@ but if you want to use `Flow` you have to switch to >=5.5 to make generators ava
 
 ## Usage
 
+I will not explain the concept of the promises here. I will assume that you are already familiar with them.
 ``` php
 require 'vendor/autoload.php';
 
@@ -57,14 +57,38 @@ $x->then(function($val){
 });
 
 $x->fulfill(1);
-
 ```
 
 You can see that in addition to the classical `then` there are two 'sugar' methods - `trap` to catch rejects,
 and `end` to make finalization.
 
-At this moment there are not so much usage examples. Please, take a look at unit tests to see more.
+You will find standard set of promises in this package: `Fulfilled`,  `Rejected`,  `Deferred`,  `All`,  `Some`,  `Race` and `Flow`.
 
+I'd like to show you a fabricated example of `Flow` promise.
+``` php
+$x = new Flow(function () {
+	$v1 = (yield promiseProducer1());
+	$v2 = (yield promiseProducer2());
+	$v3 = (yield promiseProducer3($v1, $v2));
+	yield $v3;
+});
+```
+`Flow` promise works like an envelope for its 'flow function'. In that function you can use special syntax to work with promises.
+Instead of chaining promises with `then` you can describe execution flow in a straightforward manner just like you do in a synchronous world.
+All you have to do is to preface your promises with `yield` keyword. `Flow` makes the rest behind the scene.
+
+``` php
+$x = new Flow(function () {
+	$v1 = (yield promiseProducer1());
+	try{
+		$v2 = (yield promiseProducer2($v1));
+	}catch(Exception $e){
+		$v2 = (yield promiseProducer3($v1));
+	}
+	yield $v2;
+});
+```
+You can see that you can `catch` rejected promises with `try...catch` constructions.
 
 ## Tests
 
